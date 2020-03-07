@@ -39,6 +39,5 @@ blogHeading title =
         , Font.family [ Font.typeface "Raleway" ]
         , Element.Region.heading 1
         , Font.size 36
-        , Font.center
         ]
         [ Element.text title ]

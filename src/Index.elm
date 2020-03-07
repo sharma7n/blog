@@ -59,10 +59,8 @@ title text =
     [ Element.text text ]
         |> Element.paragraph
             [ Element.Font.size 36
-            , Element.Font.center
             , Element.Font.family [ Element.Font.typeface "Raleway" ]
             , Element.Font.semiBold
-            , Element.padding 16
             ]
 
 
@@ -104,10 +102,7 @@ postPreview post =
         ]
         [ title post.title
         , Element.row [ Element.spacing 10, Element.centerX ]
-            [ Data.Author.view [ Element.width (Element.px 40) ] post.author
-            , Element.text post.author.name
-            , Element.text "•"
-            , Element.text (post.published |> Date.format "MMMM ddd, yyyy")
+            [ Element.text (post.published |> Date.format "MMMM ddd, yyyy")
             ]
         , post.description
             |> Element.text
