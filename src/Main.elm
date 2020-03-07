@@ -37,12 +37,12 @@ manifest =
     , categories = [ Pages.Manifest.Category.education ]
     , displayMode = Manifest.Standalone
     , orientation = Manifest.Portrait
-    , description = "elm-pages-starter - A statically typed site generator."
+    , description = "Nik Sharma's blog."
     , iarcRatingId = Nothing
-    , name = "elm-pages-starter"
+    , name = "Nik Sharma's blog"
     , themeColor = Just Color.white
     , startUrl = pages.index
-    , shortName = Just "elm-pages-starter"
+    , shortName = Just "Nik Sharma's blog"
     , sourceIcon = images.iconPng
     }
 
@@ -197,20 +197,9 @@ pageView model siteMetadata page viewForPage =
                         , Element.centerX
                         ]
                         (Element.column [ Element.spacing 10 ]
-                            [ Element.row [ Element.spacing 10 ]
-                                [ Author.view [] metadata.author
-                                , Element.column [ Element.spacing 10, Element.width Element.fill ]
-                                    [ Element.paragraph [ Font.bold, Font.size 24 ]
-                                        [ Element.text metadata.author.name
-                                        ]
-                                    , Element.paragraph [ Font.size 16 ]
-                                        [ Element.text metadata.author.bio ]
-                                    ]
-                                ]
-                            ]
-                            :: (publishedDateView metadata |> Element.el [ Font.size 16, Font.color (Element.rgba255 0 0 0 0.6) ])
+                            []
                             :: Palette.blogHeading metadata.title
-                            :: articleImageView metadata.image
+                            :: (publishedDateView metadata |> Element.el [ Font.size 16, Font.color (Element.rgba255 0 0 0 0.6) ])
                             :: [ viewForPage ]
                         )
                     ]
@@ -238,21 +227,13 @@ pageView model siteMetadata page viewForPage =
             }
 
         Metadata.BlogIndex ->
-            { title = "elm-pages blog"
+            { title = "Nik Sharma's blog"
             , body =
                 Element.column [ Element.width Element.fill ]
                     [ header page.path
                     , Element.column [ Element.padding 20, Element.centerX ] [ Index.view siteMetadata ]
                     ]
             }
-
-
-articleImageView : ImagePath Pages.PathKey -> Element msg
-articleImageView articleImage =
-    Element.image [ Element.width Element.fill ]
-        { src = ImagePath.toString articleImage
-        , description = "Article cover photo"
-        }
 
 
 header : PagePath Pages.PathKey -> Element msg
@@ -281,15 +262,12 @@ header currentPath =
             [ Element.link []
                 { url = "/"
                 , label =
-                    Element.row [ Font.size 30, Element.spacing 16 ]
-                        [ DocumentSvg.view
-                        , Element.text "elm-pages-starter"
+                    Element.row [ Font.size 30, Element.spacing 16, Element.padding 10 ]
+                        [ Element.text "Nik Sharma's blog"
                         ]
                 }
             , Element.row [ Element.spacing 15 ]
-                [ elmDocsLink
-                , githubRepoLink
-                , highlightableLink currentPath pages.blog.directory "Blog"
+                [ highlightableLink currentPath pages.blog.directory "Blog"
                 ]
             ]
         ]
@@ -338,7 +316,7 @@ head metadata =
                 Metadata.Page meta ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages-starter"
+                        , siteName = "Nik Sharma's blog"
                         , image =
                             { url = images.iconPng
                             , alt = "elm-pages logo"
@@ -354,7 +332,7 @@ head metadata =
                 Metadata.Article meta ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages starter"
+                        , siteName = "Nik Sharma's blog"
                         , image =
                             { url = meta.image
                             , alt = meta.description
@@ -391,16 +369,16 @@ head metadata =
                     in
                     Seo.summary
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages-starter"
+                        , siteName = "Nik Sharma's blog"
                         , image =
                             { url = meta.avatar
-                            , alt = meta.name ++ "'s elm-pages articles."
+                            , alt = meta.name ++ "'s articles."
                             , dimensions = Nothing
                             , mimeType = Nothing
                             }
                         , description = meta.bio
                         , locale = Nothing
-                        , title = meta.name ++ "'s elm-pages articles."
+                        , title = meta.name ++ "'s articles."
                         }
                         |> Seo.profile
                             { firstName = firstName
@@ -411,16 +389,16 @@ head metadata =
                 Metadata.BlogIndex ->
                     Seo.summaryLarge
                         { canonicalUrlOverride = Nothing
-                        , siteName = "elm-pages"
+                        , siteName = "Nik Sharma's blog"
                         , image =
                             { url = images.iconPng
-                            , alt = "elm-pages logo"
+                            , alt = "logo"
                             , dimensions = Nothing
                             , mimeType = Nothing
                             }
                         , description = siteTagline
                         , locale = Nothing
-                        , title = "elm-pages blog"
+                        , title = "blog"
                         }
                         |> Seo.website
            )
@@ -428,12 +406,12 @@ head metadata =
 
 canonicalSiteUrl : String
 canonicalSiteUrl =
-    "https://elm-pages-starter.netlify.com"
+    "https://sharma7n.netlify.com"
 
 
 siteTagline : String
 siteTagline =
-    "Starter blog for elm-pages"
+    "Nik Sharma's blog"
 
 
 publishedDateView metadata =
@@ -441,29 +419,3 @@ publishedDateView metadata =
         (metadata.published
             |> Date.format "MMMM ddd, yyyy"
         )
-
-
-githubRepoLink : Element msg
-githubRepoLink =
-    Element.newTabLink []
-        { url = "https://github.com/dillonkearns/elm-pages"
-        , label =
-            Element.image
-                [ Element.width (Element.px 22)
-                , Font.color Palette.color.primary
-                ]
-                { src = ImagePath.toString Pages.images.github, description = "Github repo" }
-        }
-
-
-elmDocsLink : Element msg
-elmDocsLink =
-    Element.newTabLink []
-        { url = "https://package.elm-lang.org/packages/dillonkearns/elm-pages/latest/"
-        , label =
-            Element.image
-                [ Element.width (Element.px 22)
-                , Font.color Palette.color.primary
-                ]
-                { src = ImagePath.toString Pages.images.elmLogo, description = "Elm Package Docs" }
-        }

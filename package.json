@@ -1,22 +1,22 @@
 {
-  "name": "elm-pages-example",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "Example site built with elm-pages.",
+  "description": "Nik Sharma's blog",
   "scripts": {
     "start": "elm-pages develop",
     "serve": "npm run build && http-server ./dist -a localhost -p 3000 -c-1",
     "build": "elm-pages build"
   },
-  "author": "Dillon Kearns",
+  "author": "Nik Sharma",
   "license": "BSD-3",
   "dependencies": {
     "elm-pages": "1.2.10",
     "highlight.js": "^9.15.10",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {
     "elm": "latest-0.19.1",
     "elm-format": "^0.8.2",
-    "http-server": "^0.11.1"
+    "http-server": "^0.12.1"
   }
 }
