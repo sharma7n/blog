@@ -281,9 +281,8 @@ header currentPath =
             [ Element.link []
                 { url = "/"
                 , label =
-                    Element.row [ Font.size 30, Element.spacing 16 ]
-                        [ DocumentSvg.view
-                        , Element.text "Nik Sharma's blog"
+                    Element.row [ Font.size 30, Element.spacing 16, Element.padding 10 ]
+                        [ Element.text "Nik Sharma's blog"
                         ]
                 }
             , Element.row [ Element.spacing 15 ]
