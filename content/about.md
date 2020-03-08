@@ -8,4 +8,4 @@ Hi, I'm Nik! I'm a Chicago-based software engineer at Google. When I'm not at wo
 - Email: sharma7n (at) gmail (dot) com
 - Github: https://github.com/sharma7n
 
-This blog was built using [https://elm-pages.com/](elm-pages).
+This blog was built using [elm-pages](https://elm-pages.com/).
