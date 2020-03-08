@@ -20,31 +20,38 @@ Points:
 - Exhaustive Sum Types in static FP languages
 - Code snippets / personal experience
 
+We are tasked with writing a program to score a hypothetical game of darts. The scoring system has the following rules:
+
+- The player is allowed to throw as many darts as they want, but the game stops once they miss three (total) throws.
+- Missed throws are awarded no points.
+
 Consider the following python code:
 
 ```python
 import collections
 
 
-def total_score(games):
-    state = collections.defaultdict(list)
+def score(shots):
+    points_by_zone = collections.defaultdict(collections.Counter)
     misses = 0
     penalty = 0
 
-    for game in games:
+    for shot in shots:
         if misses >= 3:
             break
     
-        if game.reward == 'small':
-            state['small'].append(game)
-        elif game.reward == 'big':
-            state['big'].append(game)
-        elif game.reward == 'penalty':
+        if shot.zone == 'easy':
+            points_by_zone['easy'][shot.points] += 1
+        elif shot.zone == 'hard':
+            points_by_zone['big'][shot.points] += 1
+        elif shot.zone == 'penalty':
             penalty += 1
         else:
             misses += 1
   
-    small_score = sum(g.score for g in state['small'])
-    big_score = sum(g.score for g in state['big'])
-    return small_score + (2 * big_score) - penalty
+    return {
+        'points_by_zone': points_by_zone,
+        'penalty': penalty,
+        'misses': misses,
+    }
 ```
