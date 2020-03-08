@@ -267,33 +267,18 @@ header currentPath =
                         ]
                 }
             , Element.row [ Element.spacing 15 ]
-                [ highlightableLink currentPath pages.blog.directory "Blog"
+                [ pageLink pages.index "Blog"
+                , pageLink pages.about "About"
                 ]
             ]
         ]
 
 
-highlightableLink :
-    PagePath Pages.PathKey
-    -> Directory Pages.PathKey Directory.WithIndex
-    -> String
-    -> Element msg
-highlightableLink currentPath linkDirectory displayName =
-    let
-        isHighlighted =
-            currentPath |> Directory.includes linkDirectory
-    in
-    Element.link
-        (if isHighlighted then
-            [ Font.underline
-            , Font.color Palette.color.primary
-            ]
-
-         else
-            []
-        )
-        { url = linkDirectory |> Directory.indexPath |> PagePath.toString
-        , label = Element.text displayName
+pageLink : PagePath Pages.PathKey -> String -> Element msg
+pageLink path label =
+    Element.link []
+        { url = PagePath.toString path
+        , label = Element.text label
         }
 
 
